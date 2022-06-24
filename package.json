@@ -1,0 +1,19 @@
+{
+  "name": "mvp-grocery-online-shopping",
+  "version": "1.0.0",
+  "description": "mvp project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node indedx.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HmidiHoussem/MVP-Grocery-online-shopping.git"
+  },
+  "author": "Hmidi Houssem",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HmidiHoussem/MVP-Grocery-online-shopping/issues"
+  },
+  "homepage": "https://github.com/HmidiHoussem/MVP-Grocery-online-shopping#readme"
+}
