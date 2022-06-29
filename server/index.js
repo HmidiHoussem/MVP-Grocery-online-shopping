@@ -1,30 +1,43 @@
 const express = require("express");
-var app = express();
-var router = express.Router();
+const itemRoutes = require("./routes/item.routes");
+const conn = require("./database-mysql/index");
+const axios = require("axios");
 
-app.use(express.static(__dirname));
-app.use(express.static(__dirname + "/../client"));
+// TODO: Update this
+// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
+var items = require("./database-mysql");
+// var items = require('./database-mongo');
 
-router.get("/", (req, res) => {
-  res.sendFile("/../client/index.html", { root: __dirname });
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const path = require("path");
+
+// app.use(express.static(path.join(__dirname, +".../client/public")));
+
+app.use(express.static(__dirname + "/../client/public"));
+
+app.get("/test", (req, res) => {
+  res.send("test");
 });
 
-/*
-router.get("/test", function (req, res) {
-  console.log("Router Working");
-  res.send("welcome in my first server");
-  res.end();
+// get all the list request
+app.get("/allItems", (req, res) => {
+  let sql = `SELECT * from shopList`;
+  conn.query(sql, (err, shopList) => {
+    if (err) {
+      console.error("Request failed");
+    } else {
+      res.status(200).send(shopList);
+    }
+  });
 });
-router.get("/hello", (req, res) => {
-  res.send("Hello, welcome in my first server");
-});
-router.post("/hi", (req, res) => {
-  console.log("hi test");
-  res.end(`You are now logged `);
-});
-*/
 
-app.use("/", router);
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
-let port = 3000;
-app.listen(port, () => console.log(`server works on port ${port}`));
+// app.use("/api/items", itemRoutes);
+
+app.listen(PORT, function () {
+  console.log(`listening on port ${PORT}!`);
+});
